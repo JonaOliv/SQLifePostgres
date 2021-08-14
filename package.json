@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "NODE_ENV=production node ./bin/www",
     "test": "snyk test",
-    "devl": "NODE_ENV=development node ./bin/www"
+    "dev": "NODE_ENV=development node ./bin/www",
+    "testing": "NODE_ENV=testing node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,9 +16,13 @@
     "express-handlebars": "^5.3.2",
     "hbs": "^4.1.2",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.5"
   },
   "devDependencies": {
+    "sequelize-cli": "^6.2.0",
     "snyk": "^1.663.0"
   }
 }

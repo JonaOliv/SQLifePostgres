@@ -10,11 +10,10 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // DOTENV
-var dotenv = require('dotenv');
-const result = dotenv.config();
+const dotenv = require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 
-if (result.error) {
-  throw result.error;
+if (dotenv.error) {
+  throw dotenv.error;
 }
 
 // view engine setup
