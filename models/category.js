@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Course, {
+        foreignKey: 'category_id',
+        as: 'courses'
+      });
     }
   };
   Category.init({
@@ -18,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Category',
+    tableName: 'categories'
   });
   return Category;
 };

@@ -14,10 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Schedule.init({
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    application_id: DataTypes.INTEGER,
+    major_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Schedule',
+    tableName: 'schedules'
   });
   return Schedule;
 };

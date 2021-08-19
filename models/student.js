@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsToMany(models.Schedule, {
+        through: 'Schedule',
+        as: 'courses',
+        foreignKey: 'student_id'
+      });
     }
   };
   Student.init({
@@ -18,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Student',
+    tableName: 'students'
   });
   return Student;
 };
