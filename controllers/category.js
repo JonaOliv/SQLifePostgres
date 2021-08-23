@@ -1,63 +1,63 @@
 'use strict';
 
-const Course = require('../models').Course;
+const Category = require('../models').Category;
 
 module.exports = {
   list(req, res) {
-    return Course
+    return Category
       .findAll({})
-      .then((Courses) => res.status(200).send(Courses))
+      .then((Categories) => res.status(200).send(Categories))
       .catch((error) => { res.status(400).send(error); });
   },
   getById(req, res) {
-    return Course
+    return Category
       .findByPk(req.params.id, {})
-      .then((Course) => {
-        if (!Course) {
+      .then((Category) => {
+        if (!Category) {
           return res.status(404).send({
-            message: 'Course Not Found',
+            message: 'Category Not Found',
           });
         }
-        return res.status(200).send(Course);
+        return res.status(200).send(Category);
       })
       .catch((error) => res.status(400).send(error));
   },
   add(req, res) {
-    return Course
+    return Category
       .create({
-        title: req.body.title
+        name: req.body.name
       })
-      .then((Course) => res.status(201).send(Course))
+      .then((Category) => res.status(201).send(Category))
       .catch((error) => res.status(400).send(error));
   },
   update(req, res) {
-    return Course
+    return Category
       .findByPk(req.params.id, {})
-      .then(Course => {
-        if (!Course) {
+      .then(Category => {
+        if (!Category) {
           return res.status(404).send({
-            message: 'Course Not Found',
+            message: 'Category Not Found',
           });
         }
-        return Course
+        return Category
           .update({
-            title: req.body.title || Course.title,
+            name: req.body.name || Category.name,
           })
-          .then(() => res.status(200).send(Course))
+          .then(() => res.status(200).send(Category))
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
   },
   delete(req, res) {
-    return Course
+    return Category
       .findByPk(req.params.id)
-      .then(Course => {
-        if (!Course) {
+      .then(Category => {
+        if (!Category) {
           return res.status(400).send({
-            message: 'Course Not Found',
+            message: 'Category Not Found',
           });
         }
-        return Course
+        return Category
           .destroy()
           .then(() => res.status(204).send())
           .catch((error) => res.status(400).send(error));

@@ -3,6 +3,18 @@
 const Student = require('../models').Student;
 
 module.exports = {
+  getCourses(req, res){
+
+  },
+  getCourse(req, res){
+
+  },
+  addSchedules(req, res){
+    var listInterests = req.body.listInterests;
+    return Schedule.bulkCreate(listInterests, { updateOnDuplicate: ['description', 'update_at'] })
+      .then((schedules) => res.status(201).send(schedules))
+      .catch((error) => res.status(400).send(error));
+  },
   list(req, res) {
     return Student
       .findAll({})
