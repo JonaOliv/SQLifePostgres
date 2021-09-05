@@ -1,13 +1,52 @@
 'use strict';
 
 const Student = require('../models').Student;
+const Schedule = require('../models').Schedule;
+const Course = require('../models').Course;
 
 module.exports = {
   getCourses(req, res){
-
+    Schedule
+      .findAll({
+        where: {
+          student_id: req.params.student_id
+        },
+        include: {
+          model: Course,
+          required: true
+        }
+      })
+      .then((results) => {
+        if (!results) {
+          return res.status(404).send({
+            message: 'Courses Not Found',
+          });
+        }
+        return res.status(200).send(results);
+      })
+      .catch((error) => res.status(400).send(error));
   },
   getCourse(req, res){
-
+    return Schedule
+      .findOne({
+        where: {
+          course_id: req.params.course_id,
+          student_id: req.params.student_id
+        },
+        include: {
+          model: Course,
+          required: true
+        }
+      })
+      .then((results) => {
+        if (!results) {
+          return res.status(404).send({
+            message: 'Course Not Found',
+          });
+        }
+        return res.status(200).send(results);
+      })
+      .catch((error) => res.status(400).send(error));
   },
   addSchedules(req, res){
     var listInterests = req.body.listInterests;
